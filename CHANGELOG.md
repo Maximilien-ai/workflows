@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.1] - Unreleased
+## [0.1.2] - Unreleased
 
 - CI workflow for pull requests and pushes to `main`
 - `WORKFLOW.md` frontmatter schema at `spec/workflow-frontmatter.schema.json`
@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 - Dependency-free workflow validator at `scripts/validate-workflows.mjs`
 - Markdown lint and formatting configuration
 - Project backlog at `docs/BACKLOG.md`
+- Dependabot configuration for npm and GitHub Actions
+- `CODEOWNERS` with `@maximilien` as the default owner
 - Updated `package.json` scripts to use shared shell entrypoints
 - Normalized markdown formatting across the spec, README, and workflow examples
 - Added `owner` to managed workflow examples so the repository matches the documented contract
