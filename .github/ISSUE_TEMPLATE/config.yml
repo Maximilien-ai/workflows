@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Workflow Contribution Guidance
+    url: https://github.com/Maximilien-ai/workflows/blob/main/spec/workflow-validation.md
+    about: Review the validation and local check flow before opening an issue or PR.

@@ -20,10 +20,12 @@ This repository validates each `WORKFLOW.md` file with two layers:
 ```bash
 npm run setup
 npm install
+npm run format
 npm run validate:workflows
 npm run lint
 npm run ci
 ./setup.sh
+./format.sh
 ./lint.sh
 ./test.sh
 ```

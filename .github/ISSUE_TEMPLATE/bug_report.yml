@@ -1,0 +1,82 @@
+name: Bug Report
+description: Report a repo, spec, template, validation, or workflow bug
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: What kind of bug is this?
+      options:
+        - Spec behavior
+        - Workflow example
+        - Validation / schema
+        - CI / tooling
+        - Docs
+        - Other
+    validations:
+      required: true
+  - type: checkboxes
+    id: impacted_areas
+    attributes:
+      label: Impacted Areas
+      description: Select all that apply.
+      options:
+        - label: WORKFLOW.md spec
+        - label: Example workflows
+        - label: Agent templates / agent files
+        - label: Linting / formatting
+        - label: Validation / schema
+        - label: Release / governance
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the problem clearly.
+      placeholder: The validator rejects a valid WORKFLOW.md because...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps To Reproduce
+      description: Include exact files, commands, or input needed to reproduce.
+      placeholder: |
+        1. Run `./test.sh`
+        2. Add this frontmatter...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should have happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What happened?
+    validations:
+      required: true
+  - type: input
+    id: openclaw_version
+    attributes:
+      label: OpenClaw Version
+      description: If relevant, which OpenClaw version was tested?
+      placeholder: vX.Y.Z or N/A
+  - type: input
+    id: clawmax_version
+    attributes:
+      label: ClawMax Version
+      description: If relevant, which ClawMax version was tested?
+      placeholder: vX.Y.Z or N/A
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Links, screenshots, failing files, or related proposals.

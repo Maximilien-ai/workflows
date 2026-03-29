@@ -1,0 +1,84 @@
+name: Proposal / Suggestion
+description: Suggest a spec change, new workflow template, agent template, or tooling improvement
+title: "[Proposal] "
+labels:
+  - enhancement
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Proposal Category
+      description: What kind of proposal is this?
+      options:
+        - Spec change
+        - New workflow template
+        - New agent template / agent file
+        - Validation / schema improvement
+        - CI / tooling improvement
+        - Docs improvement
+        - Governance / release process
+    validations:
+      required: true
+  - type: checkboxes
+    id: proposal_flags
+    attributes:
+      label: Applies To
+      options:
+        - label: Changes the WORKFLOW.md spec
+        - label: Adds or updates examples
+        - label: Adds or updates agent templates / agent files
+        - label: Changes validation behavior
+        - label: Changes contribution workflow
+  - type: textarea
+    id: goal
+    attributes:
+      label: Goal
+      description: What problem does this proposal solve?
+      placeholder: We need a clearer template for...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Change
+      description: Describe the template, spec change, or process improvement.
+      placeholder: |
+        Add a workflow template that includes:
+        - clear goal
+        - labels/tags
+        - target groups
+        - tested platform versions
+    validations:
+      required: true
+  - type: textarea
+    id: metadata
+    attributes:
+      label: Suggested Metadata
+      description: Include labels/tags, agents, categories, and ownership if relevant.
+      placeholder: |
+        Labels/tags:
+        Agents:
+        Target groups:
+        Owner:
+  - type: input
+    id: openclaw_version
+    attributes:
+      label: OpenClaw Version
+      description: If relevant, which OpenClaw version was tested?
+      placeholder: vX.Y.Z or N/A
+  - type: input
+    id: clawmax_version
+    attributes:
+      label: ClawMax Version
+      description: If relevant, which ClawMax version was tested?
+      placeholder: vX.Y.Z or N/A
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility / Migration Notes
+      description: Call out any migration or compatibility implications.
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      description: Links to examples, prior art, related issues, or reproduction details if needed.

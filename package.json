@@ -9,6 +9,7 @@
   },
   "scripts": {
     "setup": "./setup.sh",
+    "format": "./format.sh",
     "lint": "./lint.sh",
     "lint:md": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
     "lint:format": "prettier --check \"**/*.{json,md,mjs,yaml,yml}\"",

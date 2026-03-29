@@ -12,12 +12,15 @@
 - [x] Add a repo `.gitignore` to exclude `node_modules/`
 - [x] Apply GitHub branch protection for `main` with required CI checks
 - [x] Add `CODEOWNERS` so review routing is explicit
+- [x] Add issue and PR templates for structured contributions
+- [x] Add a markdown autofix path for local normalization
+- [x] Add development and test guidelines to `README.md`
 
 ## Next Up
 
 - [x] Add Dependabot for npm and GitHub Actions updates
 - [ ] Decide whether to enforce workflow filename or directory naming conventions in validation
-- [ ] Publish `v0.1.2`
+- [ ] Publish `v0.1.3`
 
 ## Later
 
