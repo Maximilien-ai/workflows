@@ -10,14 +10,14 @@
 - [x] Align managed workflow examples with the documented `owner` requirement
 - [x] Add a changelog to track release-level changes
 - [x] Add a repo `.gitignore` to exclude `node_modules/`
+- [x] Apply GitHub branch protection for `main` with required CI checks
+- [x] Add `CODEOWNERS` so review routing is explicit
 
 ## Next Up
 
-- [ ] Apply GitHub branch protection for `main` with required CI checks
-- [ ] Add `CODEOWNERS` so review routing is explicit
-- [ ] Add Dependabot for npm and GitHub Actions updates
+- [x] Add Dependabot for npm and GitHub Actions updates
 - [ ] Decide whether to enforce workflow filename or directory naming conventions in validation
-- [ ] Publish `v0.1.1`
+- [ ] Publish `v0.1.2`
 
 ## Later
 
