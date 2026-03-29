@@ -3,6 +3,7 @@ name: Outline Review
 description: Review and approve content outlines before writing begins
 schedule: "manual"
 executionMode: managed
+owner: editor
 type: recurring
 dependsOn:
   - kickoff
