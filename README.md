@@ -70,6 +70,24 @@ See [spec/workflow-spec.md](spec/workflow-spec.md) for the full specification.
 
 Contributions welcome. Follow the WORKFLOW.md format with YAML frontmatter.
 
+## Development
+
+Use the shared local scripts so contributor checks match CI:
+
+```bash
+./setup.sh
+./format.sh
+./lint.sh
+./test.sh
+```
+
+- `./setup.sh` installs local tooling
+- `./format.sh` normalizes markdown and repo file formatting
+- `./lint.sh` checks markdown and formatting without changing files
+- `./test.sh` runs linting plus `WORKFLOW.md` validation
+
+Before opening a PR, include the workflow or agent template goal, category, labels/tags, target agents, and the OpenClaw and/or ClawMax versions you tested with.
+
 ## License
 
 MIT
