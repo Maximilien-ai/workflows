@@ -3,6 +3,7 @@ name: Fact Check
 description: Technical review and fact-checking of completed drafts
 schedule: "manual"
 executionMode: managed
+owner: reviewer
 type: recurring
 dependsOn:
   - draft-writing

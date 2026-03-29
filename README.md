@@ -11,7 +11,7 @@ Workflow definitions for multiagent teams. Each workflow defines a scheduled or 
 
 ## Structure
 
-```
+```text
 spec/                          # Format specification
   workflow-spec.md             # WORKFLOW.md format spec
 workflows/                     # Example workflows
@@ -58,13 +58,13 @@ See [spec/workflow-spec.md](spec/workflow-spec.md) for the full specification.
 
 ## Example Workflows
 
-| Workflow | Schedule | Mode | Description |
-|----------|----------|------|-------------|
-| Team Kickoff | manual | managed | Initialize team, assign roles |
-| PR Review | every 2h | automated | Review open pull requests |
-| Daily Standup | 9:30am daily | automated | Async status updates |
-| Pipeline Monitoring | hourly | automated | Check data pipeline health |
-| Release Prep | manual | managed | Changelog, version bump, QA |
+| Workflow            | Schedule     | Mode      | Description                   |
+| ------------------- | ------------ | --------- | ----------------------------- |
+| Team Kickoff        | manual       | managed   | Initialize team, assign roles |
+| PR Review           | every 2h     | automated | Review open pull requests     |
+| Daily Standup       | 9:30am daily | automated | Async status updates          |
+| Pipeline Monitoring | hourly       | automated | Check data pipeline health    |
+| Release Prep        | manual       | managed   | Changelog, version bump, QA   |
 
 ## Contributing
 

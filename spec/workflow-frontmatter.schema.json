@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Maximilien-ai/workflows/spec/workflow-frontmatter.schema.json",
+  "title": "WORKFLOW.md Frontmatter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "description",
+    "schedule",
+    "executionMode",
+    "type",
+    "targeting"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "schedule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "executionMode": {
+      "type": "string",
+      "enum": ["automated", "managed"]
+    },
+    "owner": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[-_][a-z0-9]+)*$"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["once", "recurring", "conditional"]
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "modified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "maxRuns": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "dependsOn": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "targeting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["communities", "groups", "tags", "agents"],
+      "properties": {
+        "communities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "agents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(?:[-_][a-z0-9]+)*$"
+          },
+          "uniqueItems": true
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "executionMode": {
+            "const": "managed"
+          }
+        },
+        "required": ["executionMode"]
+      },
+      "then": {
+        "required": ["owner"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "conditional"
+          }
+        },
+        "required": ["type"]
+      },
+      "then": {
+        "required": ["dependsOn"],
+        "properties": {
+          "dependsOn": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}
