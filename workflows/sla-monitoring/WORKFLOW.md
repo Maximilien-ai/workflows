@@ -1,11 +1,12 @@
 ---
+id: sla-monitoring
 name: SLA Monitoring
 description: Monitor SLA compliance and flag at-risk tickets
 schedule: "0 * * * *"
 executionMode: automated
 type: recurring
 dependsOn:
-  - kickoff
+  - team-kickoff
 targeting:
   communities: []
   groups:

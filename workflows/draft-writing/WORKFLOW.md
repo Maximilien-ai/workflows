@@ -1,4 +1,5 @@
 ---
+id: draft-writing
 name: Draft Writing
 description: Daily writing check-in and draft progress tracking
 schedule: "0 10 * * *"

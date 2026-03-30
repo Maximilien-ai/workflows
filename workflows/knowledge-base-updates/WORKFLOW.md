@@ -1,4 +1,5 @@
 ---
+id: knowledge-base-updates
 name: Knowledge Base Updates
 description: Weekly KB gap analysis and article updates
 schedule: "0 10 * * 5"

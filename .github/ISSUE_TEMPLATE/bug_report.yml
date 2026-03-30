@@ -1,9 +1,13 @@
 name: Bug Report
 description: Report a repo, spec, template, validation, or workflow bug
-title: "[Bug] "
+title: "fix: "
 labels:
   - bug
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Use a conventional issue title prefix such as `fix:`, `feat:`, `docs:`, or `chore:`.
   - type: dropdown
     id: category
     attributes:

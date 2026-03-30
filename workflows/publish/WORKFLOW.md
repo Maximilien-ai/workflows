@@ -1,4 +1,5 @@
 ---
+id: publish
 name: Publish
 description: Format and publish approved content
 schedule: "manual"

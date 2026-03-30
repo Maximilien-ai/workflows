@@ -1,9 +1,13 @@
 name: Proposal / Suggestion
 description: Suggest a spec change, new workflow template, agent template, or tooling improvement
-title: "[Proposal] "
+title: "feat: "
 labels:
   - enhancement
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Use a conventional issue title prefix such as `feat:`, `fix:`, `docs:`, or `chore:`.
   - type: dropdown
     id: category
     attributes:

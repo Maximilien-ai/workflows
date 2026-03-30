@@ -1,11 +1,12 @@
 ---
+id: daily-standup
 name: Daily Standup
 description: Async daily standup — what was done, what's planned, blockers
 schedule: "30 9 * * *"
 executionMode: automated
 type: recurring
 dependsOn:
-  - kickoff
+  - team-kickoff
 targeting:
   communities: []
   groups:

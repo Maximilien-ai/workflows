@@ -1,11 +1,12 @@
 ---
+id: ticket-triage
 name: Ticket Triage
 description: Triage and prioritize incoming support tickets
 schedule: "*/30 * * * *"
 executionMode: automated
 type: recurring
 dependsOn:
-  - kickoff
+  - team-kickoff
 targeting:
   communities: []
   groups:

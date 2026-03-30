@@ -28,6 +28,7 @@ Workflows are defined as `.md` files with YAML frontmatter (metadata) + markdown
 
 ```yaml
 ---
+id: daily-standup
 name: Daily Standup
 description: Async daily standup
 schedule: "30 9 * * *"
@@ -69,6 +70,18 @@ See [spec/workflow-spec.md](spec/workflow-spec.md) for the full specification.
 ## Contributing
 
 Contributions welcome. Follow the WORKFLOW.md format with YAML frontmatter.
+Workflow examples must live at `workflows/<id>/WORKFLOW.md`, and `id` should be the lowercase slug of the workflow name.
+
+## Source Of Truth
+
+ClawMax originated the `WORKFLOW.md` spec and the initial workflow examples in this repository.
+
+For now:
+
+- ClawMax-derived workflows should stay synced with the source templates in `Maximilien-ai/clawmax`
+- Community-submitted workflows are maintained in this repository on their own terms
+
+The intended direction is to make this repository the primary public home for the spec and workflow examples, with ClawMax eventually pulling from here instead of acting as the long-term upstream source.
 
 ## Development
 

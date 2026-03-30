@@ -5,6 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "required": [
+    "id",
     "name",
     "description",
     "schedule",

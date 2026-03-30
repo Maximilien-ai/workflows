@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.1.3] - Unreleased
+## [0.1.4] - Unreleased
 
 - CI workflow for pull requests and pushes to `main`
 - `WORKFLOW.md` frontmatter schema at `spec/workflow-frontmatter.schema.json`
@@ -16,6 +16,8 @@ All notable changes to this project will be documented in this file.
 - Issue and pull request templates for structured contributions
 - Markdown autofix entrypoint at `./format.sh`
 - README development guidelines for setup, formatting, linting, and validation
+- Required workflow IDs as slugified names, with `workflows/<id>/WORKFLOW.md` enforced in validation
+- Invalid workflow fixtures and a release checklist
 - Updated `package.json` scripts to use shared shell entrypoints
 - Normalized markdown formatting across the spec, README, and workflow examples
 - Added `owner` to managed workflow examples so the repository matches the documented contract
