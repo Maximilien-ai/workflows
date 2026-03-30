@@ -1,10 +1,8 @@
 ---
-id: release-prep
 name: Release Prep
-description: "Prepare a release: changelog, version bump, final QA"
-schedule: "manual"
+description: 'Prepare a release: changelog, version bump, final QA'
+schedule: manual
 executionMode: managed
-owner: tech-lead
 type: conditional
 dependsOn:
   - pr-review
@@ -17,7 +15,6 @@ targeting:
   tags: []
   agents: []
 ---
-
 # Release Preparation
 
 1. QA engineer: run full regression suite and report results

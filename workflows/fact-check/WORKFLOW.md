@@ -1,10 +1,8 @@
 ---
-id: fact-check
 name: Fact Check
 description: Technical review and fact-checking of completed drafts
-schedule: "manual"
+schedule: manual
 executionMode: managed
-owner: reviewer
 type: recurring
 dependsOn:
   - draft-writing
@@ -16,7 +14,6 @@ targeting:
   agents:
     - reviewer
 ---
-
 # Fact Check & Technical Review
 
 1. Read the draft thoroughly for technical accuracy

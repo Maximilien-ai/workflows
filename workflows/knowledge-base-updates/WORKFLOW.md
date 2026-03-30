@@ -1,10 +1,8 @@
 ---
-id: knowledge-base-updates
 name: Knowledge Base Updates
 description: Weekly KB gap analysis and article updates
-schedule: "0 10 * * 5"
+schedule: 0 10 * * 5
 executionMode: managed
-owner: knowledge-mgr
 type: recurring
 dependsOn:
   - ticket-triage
@@ -17,7 +15,6 @@ targeting:
   agents:
     - knowledge-mgr
 ---
-
 # Weekly KB Review
 
 1. Analyze resolved tickets from the past week — identify recurring questions

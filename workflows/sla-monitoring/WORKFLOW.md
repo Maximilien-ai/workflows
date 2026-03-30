@@ -1,8 +1,7 @@
 ---
-id: sla-monitoring
 name: SLA Monitoring
 description: Monitor SLA compliance and flag at-risk tickets
-schedule: "0 * * * *"
+schedule: 0 * * * *
 executionMode: automated
 type: recurring
 dependsOn:
@@ -14,7 +13,6 @@ targeting:
   tags: []
   agents: []
 ---
-
 # SLA Monitoring
 
 1. Check all open tickets against SLA thresholds

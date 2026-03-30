@@ -1,8 +1,7 @@
 ---
-id: ticket-triage
 name: Ticket Triage
 description: Triage and prioritize incoming support tickets
-schedule: "*/30 * * * *"
+schedule: '*/30 * * * *'
 executionMode: automated
 type: recurring
 dependsOn:
@@ -14,7 +13,6 @@ targeting:
   tags: []
   agents: []
 ---
-
 # Ticket Triage Cycle
 
 1. Pull all unassigned tickets since last triage

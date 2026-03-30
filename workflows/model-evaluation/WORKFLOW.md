@@ -1,10 +1,8 @@
 ---
-id: model-evaluation
 name: Model Evaluation
 description: Weekly ML model performance review
-schedule: "0 14 * * 5"
+schedule: 0 14 * * 5
 executionMode: managed
-owner: ml-engineer
 type: recurring
 dependsOn:
   - pipeline-monitoring
@@ -17,7 +15,6 @@ targeting:
   agents:
     - ml-engineer
 ---
-
 # Weekly Model Evaluation
 
 1. Pull inference metrics for all deployed models (accuracy, latency, error rate)
