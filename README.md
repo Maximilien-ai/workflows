@@ -6,7 +6,7 @@ Workflow definitions for multiagent teams. Each workflow defines a scheduled or 
 
 ## Tested With
 
-- [OpenClaw](https://openclaw.ai) — open-source multiagent CLI
+- [OpenClaw](https://openclaw.ai) — Personal AI Assistant
 - [ClawMax](https://clawmax.ai) — multiagent orchestration platform
 
 ## Structure
