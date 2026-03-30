@@ -1,11 +1,12 @@
 ---
+id: pr-review
 name: PR Review
 description: Review open pull requests and provide feedback
 schedule: "0 */2 * * *"
 executionMode: automated
 type: recurring
 dependsOn:
-  - kickoff
+  - team-kickoff
 targeting:
   communities: []
   groups:

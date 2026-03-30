@@ -36,24 +36,24 @@ modified: "2026-03-27T21:39:36.091Z"
 
 #### Required Fields
 
-| Field         | Type   | Description                                |
-| ------------- | ------ | ------------------------------------------ |
-| `name`        | string | Human-readable workflow name (1-200 chars) |
-| `description` | string | What the workflow does (1-1000 chars)      |
-| `schedule`    | string | Cron expression, `"manual"`, or `"once"`   |
-| `content`     | —      | The Markdown body (1-10000 chars)          |
+| Field         | Type   | Description                                                |
+| ------------- | ------ | ---------------------------------------------------------- |
+| `id`          | string | Lowercase kebab-case slug generated from the workflow name |
+| `name`        | string | Human-readable workflow name (1-200 chars)                 |
+| `description` | string | What the workflow does (1-1000 chars)                      |
+| `schedule`    | string | Cron expression, `"manual"`, or `"once"`                   |
+| `content`     | —      | The Markdown body (1-10000 chars)                          |
 
 #### Optional Fields
 
-| Field           | Type    | Default        | Description                                            |
-| --------------- | ------- | -------------- | ------------------------------------------------------ |
-| `id`            | string  | auto-generated | Lowercase alphanumeric + dashes                        |
-| `enabled`       | boolean | `true`         | Whether the workflow is active                         |
-| `executionMode` | string  | `"automated"`  | `"automated"` or `"managed"`                           |
-| `owner`         | string  | —              | Agent ID. Required when `executionMode` is `"managed"` |
-| `author`        | string  | —              | Who created the workflow                               |
-| `maxRuns`       | integer | `0`            | Max executions before auto-disable (0 = unlimited)     |
-| `targeting`     | object  | —              | Which agents receive the workflow                      |
+| Field           | Type    | Default       | Description                                            |
+| --------------- | ------- | ------------- | ------------------------------------------------------ |
+| `enabled`       | boolean | `true`        | Whether the workflow is active                         |
+| `executionMode` | string  | `"automated"` | `"automated"` or `"managed"`                           |
+| `owner`         | string  | —             | Agent ID. Required when `executionMode` is `"managed"` |
+| `author`        | string  | —             | Who created the workflow                               |
+| `maxRuns`       | integer | `0`           | Max executions before auto-disable (0 = unlimited)     |
+| `targeting`     | object  | —             | Which agents receive the workflow                      |
 
 #### Targeting Object
 
@@ -117,27 +117,90 @@ Best practices:
 
 ## Validation
 
-On import, workflows are validated against the workflow JSON schema:
+On import, workflows are validated against the workflow JSON schema and repository rules:
 
-- `name`, `description`, `schedule`, and `content` are required
+- `id`, `name`, `description`, `schedule`, and `content` are required
 - `schedule` must be a valid cron expression, `"manual"`, or `"once"`
 - If `executionMode` is `"managed"`, `owner` must be set
-- `id` must be lowercase alphanumeric with dashes
+- `id` must be lowercase alphanumeric with dashes and match the slugified workflow name
 - Agent IDs in targeting must be lowercase alphanumeric with dashes/underscores
+- Workflow files must live at `workflows/<id>/WORKFLOW.md`
 
 ## File Location
 
-Workflows are stored as individual `.md` files:
+Workflows are stored as workflow directories with an ID-matched `WORKFLOW.md` file:
 
 ```text
-WORKSPACE/WORKFLOWS/
-  daily-standup.md
-  pr-review.md
-  kickoff.md
-  executions/        # Execution history
-    daily-standup/
-      2026-03-28T09-00-00.json
+workflows/
+  daily-standup/
+    WORKFLOW.md
+  pr-review/
+    WORKFLOW.md
+  team-kickoff/
+    WORKFLOW.md
 ```
+
+## JSON Schema Examples
+
+### Valid Example
+
+```yaml
+---
+id: team-kickoff
+name: Team Kickoff
+description: Initialize the data team and assess current infrastructure
+schedule: "manual"
+executionMode: managed
+owner: data-lead
+type: once
+targeting:
+  communities: []
+  groups: []
+  tags:
+    - lead
+  agents:
+    - data-lead
+---
+```
+
+### Invalid Examples
+
+```yaml
+---
+name: Team Kickoff
+description: Missing required id
+schedule: "manual"
+executionMode: automated
+type: once
+targeting:
+  communities: []
+  groups:
+    - Engineering
+  tags: []
+  agents: []
+---
+```
+
+This is invalid because `id` is required.
+
+```yaml
+---
+id: kickoff
+name: Team Kickoff
+description: ID does not match the slugified workflow name
+schedule: "manual"
+executionMode: automated
+type: once
+targeting:
+  communities: []
+  groups:
+    - Engineering
+  tags: []
+  agents: []
+---
+```
+
+This is invalid because `id` must match the slugified workflow name, which is `team-kickoff`.
 
 ## API
 

@@ -1,11 +1,12 @@
 ---
+id: data-quality-check
 name: Data Quality Check
 description: Daily data quality validation and anomaly detection
 schedule: "0 8 * * *"
 executionMode: automated
 type: recurring
 dependsOn:
-  - kickoff
+  - team-kickoff
 targeting:
   communities: []
   groups:

@@ -1,5 +1,7 @@
 # Summary
 
+PR title should use a conventional prefix such as `feat:`, `fix:`, `docs:`, or `chore:`.
+
 Describe the change in 1-3 sentences.
 
 ## Template Metadata

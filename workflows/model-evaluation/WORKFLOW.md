@@ -1,4 +1,5 @@
 ---
+id: model-evaluation
 name: Model Evaluation
 description: Weekly ML model performance review
 schedule: "0 14 * * 5"
@@ -7,7 +8,7 @@ owner: ml-engineer
 type: recurring
 dependsOn:
   - pipeline-monitoring
-  - data-quality
+  - data-quality-check
 targeting:
   communities: []
   groups:

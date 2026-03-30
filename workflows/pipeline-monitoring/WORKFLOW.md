@@ -1,11 +1,12 @@
 ---
+id: pipeline-monitoring
 name: Pipeline Monitoring
 description: Hourly pipeline health check and failure alerting
 schedule: "0 * * * *"
 executionMode: automated
 type: recurring
 dependsOn:
-  - kickoff
+  - team-kickoff
 targeting:
   communities: []
   groups:

@@ -1,4 +1,5 @@
 ---
+id: release-prep
 name: Release Prep
 description: "Prepare a release: changelog, version bump, final QA"
 schedule: "manual"

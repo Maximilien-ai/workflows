@@ -4,6 +4,7 @@ import process from "node:process";
 
 const repoRoot = process.cwd();
 const workflowsDir = path.join(repoRoot, "workflows");
+const invalidFixturesDir = path.join(repoRoot, "fixtures", "invalid-workflows");
 
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const agentPattern = /^[a-z0-9]+(?:[-_][a-z0-9]+)*$/;
@@ -162,6 +163,13 @@ function validateCron(schedule) {
   );
 }
 
+function slugifyName(name) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 function validateWorkflow(frontmatter, body, file) {
   const errors = [];
   const allowedKeys = new Set([
@@ -188,6 +196,7 @@ function validateWorkflow(frontmatter, body, file) {
   }
 
   const requiredStringFields = [
+    "id",
     "name",
     "description",
     "schedule",
@@ -218,11 +227,23 @@ function validateWorkflow(frontmatter, body, file) {
     );
   }
 
-  if (
-    "id" in frontmatter &&
-    (!frontmatter.id || !slugPattern.test(frontmatter.id))
-  ) {
+  if (!("id" in frontmatter)) {
+    errors.push(`${file}: "id" is required and must be a non-empty string`);
+  } else if (!frontmatter.id || !slugPattern.test(frontmatter.id)) {
     errors.push(`${file}: "id" must use lowercase kebab-case`);
+  }
+
+  if (
+    typeof frontmatter.id === "string" &&
+    typeof frontmatter.name === "string" &&
+    frontmatter.id !== slugifyName(frontmatter.name)
+  ) {
+    errors.push(`${file}: "id" must match the slugified workflow name`);
+  }
+
+  const directoryName = path.basename(path.dirname(file));
+  if (typeof frontmatter.id === "string" && directoryName !== frontmatter.id) {
+    errors.push(`${file}: directory name must match the workflow id`);
   }
 
   if (
@@ -356,6 +377,43 @@ async function getWorkflowFiles() {
     .sort();
 }
 
+async function getInvalidFixtureCases() {
+  try {
+    const entries = await fs.readdir(invalidFixturesDir, {
+      withFileTypes: true,
+    });
+    return entries
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name)
+      .sort();
+  } catch (error) {
+    if (error.code === "ENOENT") {
+      return [];
+    }
+    throw error;
+  }
+}
+
+async function readWorkflowFile(file) {
+  const absolutePath = path.join(repoRoot, file);
+  const raw = await fs.readFile(absolutePath, "utf8");
+  const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+
+  if (!match) {
+    return {
+      frontmatter: null,
+      body: "",
+      errors: [
+        `${file}: file must start with YAML frontmatter delimited by ---`,
+      ],
+    };
+  }
+
+  const [, frontmatterBlock, body] = match;
+  const frontmatter = parseYamlSubset(frontmatterBlock, file);
+  return { frontmatter, body, errors: [] };
+}
+
 const workflowFiles = await getWorkflowFiles();
 
 if (workflowFiles.length === 0) {
@@ -366,20 +424,65 @@ if (workflowFiles.length === 0) {
 const errors = [];
 
 for (const file of workflowFiles) {
-  const absolutePath = path.join(repoRoot, file);
-  const raw = await fs.readFile(absolutePath, "utf8");
-  const match = raw.match(/^---\n([\s\S]*?)\n---\n?([\s\S]*)$/);
+  const {
+    frontmatter,
+    body,
+    errors: fileErrors,
+  } = await readWorkflowFile(file);
+  errors.push(...fileErrors);
+  if (!frontmatter) {
+    continue;
+  }
+  errors.push(...validateWorkflow(frontmatter, body, file));
+}
 
-  if (!match) {
+const invalidFixtureCases = await getInvalidFixtureCases();
+
+for (const fixtureCase of invalidFixtureCases) {
+  const fixtureWorkflow = path.join(
+    "fixtures",
+    "invalid-workflows",
+    fixtureCase,
+    "WORKFLOW.md",
+  );
+  const expectedErrorsFile = path.join(
+    repoRoot,
+    "fixtures",
+    "invalid-workflows",
+    fixtureCase,
+    "expected-errors.txt",
+  );
+
+  const {
+    frontmatter,
+    body,
+    errors: fixtureErrors,
+  } = await readWorkflowFile(fixtureWorkflow);
+  const actualErrors = [...fixtureErrors];
+
+  if (frontmatter) {
+    actualErrors.push(...validateWorkflow(frontmatter, body, fixtureWorkflow));
+  }
+
+  if (actualErrors.length === 0) {
     errors.push(
-      `${file}: file must start with YAML frontmatter delimited by ---`,
+      `${fixtureWorkflow}: expected this invalid fixture to fail validation`,
     );
     continue;
   }
 
-  const [, frontmatterBlock, body] = match;
-  const frontmatter = parseYamlSubset(frontmatterBlock, file);
-  errors.push(...validateWorkflow(frontmatter, body, file));
+  const expectedSubstrings = (await fs.readFile(expectedErrorsFile, "utf8"))
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  for (const substring of expectedSubstrings) {
+    if (!actualErrors.some((error) => error.includes(substring))) {
+      errors.push(
+        `${fixtureWorkflow}: expected an error containing "${substring}"`,
+      );
+    }
+  }
 }
 
 if (errors.length > 0) {
@@ -390,4 +493,6 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`Validated ${workflowFiles.length} workflow files successfully.`);
+console.log(
+  `Validated ${workflowFiles.length} workflow files and ${invalidFixtureCases.length} invalid fixtures successfully.`,
+);

@@ -1,4 +1,5 @@
 ---
+id: team-kickoff
 name: Team Kickoff
 description: Initialize the data team and assess current infrastructure
 schedule: "manual"
@@ -12,6 +13,9 @@ targeting:
     - lead
   agents:
     - data-lead
+    - data-engineer
+    - analyst
+    - ml-engineer
 ---
 
 # Data Team Kickoff

@@ -1,11 +1,12 @@
 ---
+id: ci-triage
 name: CI Triage
 description: Monitor and triage CI/CD pipeline failures
 schedule: "0 * * * *"
 executionMode: automated
 type: recurring
 dependsOn:
-  - kickoff
+  - team-kickoff
 targeting:
   communities: []
   groups:
