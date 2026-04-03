@@ -1,4 +1,5 @@
 ---
+id: ci-triage
 name: CI Triage
 description: Monitor and triage CI/CD pipeline failures
 schedule: 0 * * * *
@@ -14,6 +15,7 @@ targeting:
   agents:
     - devops
 ---
+
 # CI Triage
 
 1. Check CI pipeline for any failed builds or tests

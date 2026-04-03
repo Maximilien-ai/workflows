@@ -1,6 +1,7 @@
 ---
+id: daily-standup
 name: Daily Standup
-description: 'Async daily standup — what was done, what''s planned, blockers'
+description: "Async daily standup — what was done, what's planned, blockers"
 schedule: 30 9 * * *
 executionMode: automated
 type: recurring
@@ -13,6 +14,7 @@ targeting:
   tags: []
   agents: []
 ---
+
 # Daily Standup
 
 1. Each team member: post in Status group with three items:

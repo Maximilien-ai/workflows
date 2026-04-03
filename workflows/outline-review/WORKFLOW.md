@@ -1,8 +1,10 @@
 ---
+id: outline-review
 name: Outline Review
 description: Review and approve content outlines before writing begins
 schedule: manual
 executionMode: managed
+owner: editor
 type: recurring
 dependsOn:
   - team-kickoff
@@ -14,6 +16,7 @@ targeting:
   agents:
     - editor
 ---
+
 # Outline Review
 
 1. Writers: submit proposed outlines with target audience, scope, and key sections

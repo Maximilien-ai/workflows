@@ -1,4 +1,5 @@
 ---
+id: data-quality-check
 name: Data Quality Check
 description: Daily data quality validation and anomaly detection
 schedule: 0 8 * * *
@@ -14,6 +15,7 @@ targeting:
   tags: []
   agents: []
 ---
+
 # Daily Data Quality Check
 
 1. Run schema validation on all ingested tables

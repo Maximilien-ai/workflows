@@ -1,4 +1,5 @@
 ---
+id: pipeline-monitoring
 name: Pipeline Monitoring
 description: Hourly pipeline health check and failure alerting
 schedule: 0 * * * *
@@ -13,6 +14,7 @@ targeting:
   tags: []
   agents: []
 ---
+
 # Pipeline Monitoring
 
 1. Check all scheduled ETL/ELT job statuses

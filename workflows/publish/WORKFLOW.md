@@ -1,8 +1,10 @@
 ---
+id: publish
 name: Publish
 description: Format and publish approved content
 schedule: manual
 executionMode: managed
+owner: publisher
 type: conditional
 dependsOn:
   - fact-check
@@ -14,6 +16,7 @@ targeting:
   agents:
     - publisher
 ---
+
 # Content Publishing
 
 1. Take approved, reviewed content from the Review group

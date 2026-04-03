@@ -1,8 +1,10 @@
 ---
+id: team-kickoff
 name: Team Kickoff
 description: Initialize the data team and assess current infrastructure
 schedule: manual
 executionMode: managed
+owner: data-lead
 type: once
 targeting:
   communities: []
@@ -15,11 +17,13 @@ targeting:
     - analyst
     - ml-engineer
 ---
+
 # Data Team Kickoff
 
 You are the Data Lead. Your team just came online.
 
 ## Project Configuration
+
 > **Customize these before applying:**
 
 - **Data sources:** [e.g., PostgreSQL, S3, Kafka, APIs]
@@ -30,6 +34,7 @@ You are the Data Lead. Your team just came online.
 - **GitHub repo:** [e.g., owner/repo — for pipeline code and models]
 
 ## Your Tasks
+
 1. Introduce yourself in the Data Team community
 2. Review the workspace for existing pipeline code, schemas, or dashboards
 3. Assign pipeline ownership areas to data engineers

@@ -1,4 +1,5 @@
 ---
+id: draft-writing
 name: Draft Writing
 description: Daily writing check-in and draft progress tracking
 schedule: 0 10 * * *
@@ -13,6 +14,7 @@ targeting:
   tags: []
   agents: []
 ---
+
 # Daily Draft Progress
 
 1. Each writer: post progress update on assigned drafts

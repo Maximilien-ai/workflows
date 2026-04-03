@@ -1,4 +1,5 @@
 ---
+id: pr-review
 name: PR Review
 description: Review open pull requests and provide feedback
 schedule: 0 */2 * * *
@@ -13,6 +14,7 @@ targeting:
   tags: []
   agents: []
 ---
+
 # PR Review Cycle
 
 1. List all open PRs that need review
