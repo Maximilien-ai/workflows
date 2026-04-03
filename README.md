@@ -54,8 +54,17 @@ See [spec/workflow-spec.md](spec/workflow-spec.md) for the full specification.
 - **Execution modes:** `automated` (no oversight) or `managed` (requires owner)
 - **Targeting:** by agents, groups, communities, or tags
 - **Dependencies:** `dependsOn` for DAG sequencing
+- **Secret requirements:** optional `secretRequirements` metadata for API keys, event URLs, tokens, and similar runtime inputs
 - **Types:** `once` (kickoff), `recurring` (cron), `conditional` (waits for deps)
 - **Progress:** agents report 0-100% completion
+
+## Secure Runtime Inputs
+
+Workflows can declare `secretRequirements` in frontmatter when they need user-provided runtime values such as API keys, slugs, URLs, or export paths.
+
+- ClawMax can prompt for these values at run time and store them browser-local
+- sensitive values do not need to be written into the markdown body
+- non-sensitive values can still be echoed into the run context when appropriate
 
 ## Example Workflows
 

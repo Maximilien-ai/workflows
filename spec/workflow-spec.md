@@ -46,14 +46,15 @@ modified: "2026-03-27T21:39:36.091Z"
 
 #### Optional Fields
 
-| Field           | Type    | Default       | Description                                            |
-| --------------- | ------- | ------------- | ------------------------------------------------------ |
-| `enabled`       | boolean | `true`        | Whether the workflow is active                         |
-| `executionMode` | string  | `"automated"` | `"automated"` or `"managed"`                           |
-| `owner`         | string  | —             | Agent ID. Required when `executionMode` is `"managed"` |
-| `author`        | string  | —             | Who created the workflow                               |
-| `maxRuns`       | integer | `0`           | Max executions before auto-disable (0 = unlimited)     |
-| `targeting`     | object  | —             | Which agents receive the workflow                      |
+| Field                | Type    | Default       | Description                                            |
+| -------------------- | ------- | ------------- | ------------------------------------------------------ |
+| `enabled`            | boolean | `true`        | Whether the workflow is active                         |
+| `executionMode`      | string  | `"automated"` | `"automated"` or `"managed"`                           |
+| `owner`              | string  | `n/a`         | Agent ID. Required when `executionMode` is `"managed"` |
+| `author`             | string  | `n/a`         | Who created the workflow                               |
+| `maxRuns`            | integer | `0`           | Max executions before auto-disable (0 = unlimited)     |
+| `targeting`          | object  | `n/a`         | Which agents receive the workflow                      |
+| `secretRequirements` | array   | `n/a`         | Optional runtime-secret or input prompts               |
 
 #### Targeting Object
 
@@ -66,6 +67,40 @@ targeting:
 ```
 
 At least one targeting field should have entries. Multiple fields are OR'd (union).
+
+#### Secret Requirements
+
+Workflows may declare optional `secretRequirements` metadata when they need runtime inputs such as API keys, URLs, slugs, export paths, or similar user-provided values.
+
+```yaml
+secretRequirements:
+  - key: LUMA_API_KEY
+    label: Lu.ma API Key
+    kind: api_key
+    required: false
+    sensitive: true
+    help: Optional if you are using CSV exports instead of direct API access
+  - key: LUMA_EVENT_SCOPE
+    label: Lu.ma Event URL or Slug
+    kind: url
+    required: true
+    sensitive: false
+    placeholder: https://lu.ma/your-event
+```
+
+Recommended fields for each requirement:
+
+| Field         | Type    | Description                                                         |
+| ------------- | ------- | ------------------------------------------------------------------- |
+| `key`         | string  | Stable machine-readable key, usually env-style                      |
+| `label`       | string  | User-facing label                                                   |
+| `kind`        | string  | Suggested input type such as `api_key`, `token`, `url`, or `text`   |
+| `required`    | boolean | Whether the workflow should block on a missing value                |
+| `sensitive`   | boolean | Whether the value should stay hidden and avoid markdown persistence |
+| `help`        | string  | Short explanation or acquisition guidance                           |
+| `placeholder` | string  | Optional input hint                                                 |
+
+In ClawMax, these values can be entered browser-local at run time so users do not need to hardcode secrets into the workflow body.
 
 ### Markdown Body (instructions)
 
