@@ -17,7 +17,7 @@
     "ci": "./test.sh"
   },
   "devDependencies": {
-    "markdownlint-cli2": "^0.22.0",
+    "markdownlint-cli2": "^0.22.1",
     "prettier": "^3.6.2"
   }
 }
